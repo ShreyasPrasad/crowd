@@ -1,12 +1,14 @@
-use super::{PointOfPrescence, PointOfPrescenceClientHandler};
 use warp::{filters::ws::WebSocket, Filter};
+
+use crate::pop::{PointOfPrescence, PointOfPrescenceClientHandler, PointOfPrescenceOptions};
  
 pub struct WarpPointOfPresence;
 pub struct WarpPointOfPresenceClientHandler;
 
+/** The Warp implementation for a PointOfPrescence, relying on the internal Websocket struct. */
 impl PointOfPrescence for WarpPointOfPresence {
 
-    async fn init(&self, options: super::PointOfPrescenceOptions) {
+    async fn init(&self, options: PointOfPrescenceOptions) {
         let pop = warp::path("/")
         // The `ws()` filter will prepare Websocket handshake...
         .and(warp::ws())
@@ -33,6 +35,6 @@ impl PointOfPrescenceClientHandler for WarpPointOfPresenceClientHandler {
     type Connection = WebSocket;
 
     async fn receive_client(self, conn: Self::Connection) {
-        todo!()
+        
     }
 }

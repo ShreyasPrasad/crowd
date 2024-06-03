@@ -2,12 +2,13 @@ use futures_util::Stream;
 use std::net::SocketAddr;
 
 /**
- * A point of prescence (pop) is a frontend server that receives and registers a user's websocket connection.
+ * A PointOfPrescence (PoP) is a frontend server that receives and registers a user's websocket connection.
  * Updates to this connection, including new messages, and eventual termination, are handled by this server and
  * forwarded to any selected coordination server.
  */
 
-mod warp;
+mod concrete;
+mod persistence;
 
 pub struct PointOfPrescenceOptions {
     addr: SocketAddr
